@@ -1,12 +1,14 @@
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
   }
 
   const { imageData } = req.body;
 
   if (!imageData) {
-    return res.status(400).json({ error: 'No image data provided' });
+    res.status(400).json({ error: 'No image data provided' });
+    return;
   }
 
   try {
@@ -34,12 +36,7 @@ module.exports = async (req, res) => {
               },
               {
                 type: 'text',
-                text: `Analyze this PC builder screenshot and extract the selected components.
-                Return ONLY a valid JSON object with keys: cpu, gpu, ram, storage, case, cooling
-                For each key, provide the exact component name as shown in the image.
-                If a component is not visible, omit that key.
-                Example: {"cpu": "AMD Ryzen 9 7950X", "gpu": "NVIDIA RTX 4090"}
-                Return ONLY the JSON, no other text, no markdown formatting.`
+                text: 'Analyze this PC builder screenshot and extract the selected components. Return ONLY a valid JSON object with keys: cpu, gpu, ram, storage, case, cooling. For each key, provide the exact component name as shown in the image. If a component is not visible, omit that key. Return ONLY the JSON, no other text.'
               }
             ]
           }
@@ -50,21 +47,22 @@ module.exports = async (req, res) => {
     const result = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json({
+      res.status(response.status).json({
         error: 'Claude API error',
         details: result
       });
+      return;
     }
 
     const content = result.content[0].text;
     const components = JSON.parse(content);
 
-    return res.status(200).json(components);
+    res.status(200).json(components);
   } catch (error) {
     console.error('Analysis error:', error);
-    return res.status(500).json({
+    res.status(500).json({
       error: 'Failed to analyze image',
       message: error.message
     });
   }
-};
+}
