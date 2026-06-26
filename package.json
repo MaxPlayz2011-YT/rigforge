@@ -1,7 +1,6 @@
 {
   "name": "rigforge",
   "version": "1.0.0",
-  "type": "module",
   "description": "AI-powered PC builder with Claude vision integration",
   "main": "api/analyze.js",
   "dependencies": {
