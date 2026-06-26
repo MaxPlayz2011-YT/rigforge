@@ -340,7 +340,7 @@ async function analyzeScreenWithClaude() {
     const imageData = canvas.toDataURL('image/jpeg').split(',')[1];
 
     // Call Vercel function (no API key needed on frontend)
-    const response = await fetch('https://competitive-mountainous-executable--MaxHaffner.replit.app/api/analyze', {
+    const response = await fetch('/api/analyze', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
