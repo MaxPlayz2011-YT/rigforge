@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Invoke-WebRequest -Uri \"https://api.github.com/repos/buildcores/buildcores-open-db/contents\" -UseBasicParsing | ConvertFrom-Json | Select-Object -ExpandProperty name | ForEach-Object { $_ })"
+    ]
+  }
+}
