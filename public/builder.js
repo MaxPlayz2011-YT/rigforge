@@ -362,7 +362,7 @@ async function analyzeScreenWithClaude() {
     document.getElementById('analyze-screen-btn').textContent = '📸 Analyze Screenshot';
   } catch (error) {
     console.error('Vision analysis error:', error);
-    alert('Error analyzing screenshot. Make sure your Replit server is running.');
+    alert('Error analyzing screenshot. Make sure your CLAUDE_API_KEY is set in Vercel environment variables.');
     document.getElementById('analyze-screen-btn').disabled = false;
     document.getElementById('analyze-screen-btn').textContent = '📸 Analyze Screenshot';
   }
