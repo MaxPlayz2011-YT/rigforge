@@ -1,7 +1,3 @@
 {
-  "functions": {
-    "api/**/*.js": {
-      "runtime": "nodejs@latest"
-    }
-  }
+  "buildCommand": "npm install"
 }
